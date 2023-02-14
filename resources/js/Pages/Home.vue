@@ -1,10 +1,3 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import { ref, reactive } from 'vue'
-import Tutorial from '../Tutorial/Tutorial.vue';
-</script>
-
 <template>
     <Head title="Dashboard" />
 
@@ -17,11 +10,14 @@ import Tutorial from '../Tutorial/Tutorial.vue';
                         Breadcrumbs
                     </div>
                     <div class="flex gap-x-2">
-                        <button>
+                        <button class="p-1 text-sm text-indigo-500">
                             Add
                         </button>
-                        <button>
+                        <button class="p-1 text-sm text-indigo-500">
                             Delete
+                        </button>
+                        <button @click="initiateTutorial" class="p-1 text-sm text-indigo-500">
+                            Tutorial
                         </button>
                     </div>
                 </div>
@@ -41,7 +37,8 @@ import Tutorial from '../Tutorial/Tutorial.vue';
         </div>
 
         <Tutorial 
-        
+            :steps="steps"
+            :show="showTutorial"
         />
     </AuthenticatedLayout>
 </template>
@@ -50,17 +47,19 @@ import Tutorial from '../Tutorial/Tutorial.vue';
 <script setup>
 import { ref, reactive } from 'vue'
 import Tutorial from '@/Tutorial/Tutorial.vue'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
 
-const showTutorial = ref(false);
+let showTutorial = ref(false);
 
 const initiateTutorial = () => {
-    showTutorial = true
+    showTutorial.value = true
 }
 
 const steps = reactive([
     {
         id: 0,
-        title: 'Delete via this method or whatever'
+        title: 'Delete via this method or whatever',
         element: null
     }, {
         id: 1,
